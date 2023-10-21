@@ -8,7 +8,10 @@ public class App {
     public static void main( String[] args ) {
 
         EnvSimulator ev = new EnvSimulator();
-        ev.start();
+        ev.start(); 
+
+        int A = 1;
+
 
     }
 }
