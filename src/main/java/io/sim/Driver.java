@@ -24,29 +24,36 @@ public class Driver implements Runnable {
     private BotPayment bot;
 
     private Car carro;
-    private final int cadastroDriver; 
+    private String cadastroDriver; 
     private float kmRodado;
-    private FuelSatation posto;
+    private FuelStation posto;
 
     //Dados da conta alphabank
     private String idConta;
     private double valorInicialDaConta;
     private double saldo; 
 
-    public Driver(int cadastroDriver) {
+    public Driver(String cadastroDriver) {
         this.isAlive = true;
-        this.idConta = ("Driver_" + cadastroDriver);
+        this.idConta = cadastroDriver;
         this.valorInicialDaConta = 0;
         this.saldo = 0;
         this.kmRodado = 0;
-        this.cadastroDriver = cadastroDriver;
 
         bot = new BotPayment(idConta);
-        posto = new FuelSatation();
+        posto = new FuelStation();
         carro = new Car();
         criarConta();
+        solicitarRotas();
 
         run();
+    }
+
+    private void solicitarRotas() {
+        timestamp = Instant.now();
+        long timestampNanos = timestamp.getNano() + timestamp.getEpochSecond() * 1_000_000_000L;
+        json = jsonMaker.JsonSolicitaRota(encriptador.criptografarString(idConta), encriptador.criptografarTimestamp(timestampNanos));
+        memoriaCompartilhada.write(json, "2");
     }
 
     public void run() {
@@ -103,6 +110,10 @@ public class Driver implements Runnable {
     private double getSaldo(){
         double saldoNovo = banco.getSaldo(idConta);
         return saldoNovo;
+    }
+
+    public void setRoute(ArrayList<Route> rotas) {
+        this.rotasAseremExecutadas = rotas;
     }
 
     class BotPayment {

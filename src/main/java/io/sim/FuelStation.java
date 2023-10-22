@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.json.JSONObject;
 
-public class FuelSatation {
+public class FuelStation {
 
     private boolean isAlive = false;
     private JsonManager jsonMaker = new JsonManager();
@@ -23,7 +23,7 @@ public class FuelSatation {
     private String idConta;
     private double valorInicialDaConta; 
 
-    public FuelSatation() {
+    public FuelStation() {
         this.isAlive = true;
         this.idConta = ("Fuel_Station");
         this.valorInicialDaConta = 0;

@@ -20,7 +20,11 @@ public class Route {
         this.edges = route;
     }
 
-    public String getRoute () {
+    public String getIdRota() {
+        return idRota;
+    }
+
+    public String getEdge() {
         return edges;
     }
     
