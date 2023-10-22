@@ -4,10 +4,12 @@ public class Route {
     // adicionar construtor V
     // adicionar destrutor 
     // adicionar atributos privados de rotas -> edges
+    private String idRota;
     private String edges; // limites da rota
     
-    public Route (){
-        this.edges = "empty_route";
+    public Route (String idRota, String edges){
+        this.idRota = idRota;
+        this.edges = edges;
     }
 
     public void RouteDestructor () {
